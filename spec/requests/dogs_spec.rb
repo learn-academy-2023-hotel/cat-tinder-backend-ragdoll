@@ -51,7 +51,7 @@ RSpec.describe "Dogs", type: :request do
       # create a dog
       dog_params = {
         dog: {
-          name: 'Fred',
+          name: 'Jimmy',
           age: 4,
           enjoys: 'Barking and making a mess of the litterbox',
           image: 'https://unsplash.com/photos/black-and-white-short-coated-dog-N04FIfHhv_k'
@@ -82,11 +82,11 @@ RSpec.describe "Dogs", type: :request do
         it "destroys a dog" do
           # Create a dog to delete
           dog_params = {
-        dog: {
-          name: 'Fred',
-          age: 4,
-          enjoys: 'Barking and making a mess of the litterbox',
-          image: 'https://unsplash.com/photos/black-and-white-short-coated-dog-N04FIfHhv_k'
+          dog: {
+            name: 'Jimmy',
+            age: 4,
+            enjoys: 'Barking and making a mess of the litterbox',
+            image: 'https://unsplash.com/photos/black-and-white-short-coated-dog-N04FIfHhv_k'
         }
       }
     post '/dogs', params: dog_params
@@ -100,6 +100,148 @@ RSpec.describe "Dogs", type: :request do
         end
       end
 
+      describe "cannot create a dog without valid attributes" do
+        it "can't create dog without a name" do
+          dog_params = {
+            dog: {
+              age: 2,
+              enjoys: "Enjoys long walks at the beach",
+              image: 'url'
+            }
+          }
 
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['name']).to include "can't be blank"
+
+        end
+      end
+
+      describe "cannot create a dog without valid attributes" do
+        it "can't create dog without a age" do
+          dog_params = {
+            dog: {
+              name: 'Jimmy',
+              enjoys: "Enjoys long walks at the beach",
+              image: 'url'
+            }
+          }
+
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['age']).to include "can't be blank"
+
+        end
+      end
+
+      describe "cannot create a dog without valid attributes" do
+        it "can't create dog without an enjoys" do
+          dog_params = {
+            dog: {
+              name: 'Jimmy',
+              age: 2,
+              image: 'url'
+            }
+          }
+
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['enjoys']).to include "can't be blank"
+
+        end
+      end
+
+      describe "cannot create a dog without valid attributes" do
+        it "can't create dog without an image" do
+          dog_params = {
+            dog: {
+              name: 'Jimmy',
+              age: 2,
+              enjoys: "Enjoys long walks at the beach",
+            }
+          }
+
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['image']).to include "can't be blank"
+
+        end
+      end
+
+      describe "cannot update a dog without valid attributes" do
+        it "can't update dog without a name" do
+          dog_params = {
+            dog: {
+              age: 2,
+              enjoys: "Enjoys long walks at the beach",
+              image: 'url'
+            }
+          }
+
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['name']).to include "can't be blank"
+
+        end
+      end
+
+      describe "cannot update a dog without valid attributes" do
+        it "can't update dog without a age" do
+          dog_params = {
+            dog: {
+              name: 'Jimmy',
+              enjoys: "Enjoys long walks at the beach",
+              image: 'url'
+            }
+          }
+
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['age']).to include "can't be blank"
+
+        end
+      end
+
+      describe "cannot update a dog without valid attributes" do
+        it "can't update dog without an enjoys" do
+          dog_params = {
+            dog: {
+              name: 'Jimmy',
+              age: 2,
+              image: 'url'
+            }
+          }
+
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['enjoys']).to include "can't be blank"
+
+        end
+      end
+
+      describe "cannot update a dog without valid attributes" do
+        it "can't update dog without an image" do
+          dog_params = {
+            dog: {
+              name: 'Jimmy',
+              age: 2,
+              enjoys: "Enjoys long walks at the beach",
+            }
+          }
+
+          post '/dogs', params: dog_params
+          dog = JSON.parse(response.body)
+          expect(response).to have_http_status(422)
+          expect(dog['image']).to include "can't be blank"
+
+        end
+      end
 end
 
