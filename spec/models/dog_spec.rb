@@ -25,8 +25,8 @@ RSpec.describe Dog, type: :model do
 
   it "should validate enjoys is minimum 10 characters" do
     dog = Dog.create(name:'Junior', age:3, enjoys: 'walk', image: 'url')
-    # expect(dog.errors[:enjoys]).to_not be_empty
-    expect(dog[:enjoys].length).to be >= 10
+    expect(dog.errors[:enjoys]).to_not be_empty
+    # expect(dog[:enjoys].length).to be >= 10
   end
   
 
